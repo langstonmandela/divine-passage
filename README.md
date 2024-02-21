@@ -82,7 +82,7 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
 
 ## Lay of the Land
 
-There are a few videos linked below that show a walkthrough the client and sever setup to help acclimatize to the boilerplate. Please take some time to watch the videos in order to get a better understanding of what the boilerplate is like.
+There are a few videos linked below that show a walkthrough the client and server setup to help acclimatize to the boilerplate. Please take some time to watch the videos in order to get a better understanding of what the boilerplate is like.
 
 - [Initial Set](https://vimeo.com/453297271)
 - [Server Walkthrough](https://vimeo.com/453297212)
