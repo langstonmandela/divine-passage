@@ -69,23 +69,23 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         });
 });
 
-router.put('/child/:childId', rejectUnauthenticated, async (req, res) => {
+router.post('/', rejectUnauthenticated, async (req, res) => {
+    console.log(`in POST /child`);
+    const userId = req.user.id; // User ID from Passport session
     const { firstName, lastName, dateOfBirth, gender, dateOfPlacement } = req.body;
-    const { childId } = req.params;
-
-    const queryText = `
-        UPDATE child_profile 
-        SET first_name = $1, last_name = $2, date_of_birth = $3, gender = $4, date_of_placement = $5
-        WHERE child_id = $6 AND user_id = $7;`;
 
     try {
-        await pool.query(queryText, [firstName, lastName, dateOfBirth, gender, dateOfPlacement, childId, req.user.id]);
-        res.send({ message: 'Child profile updated successfully' });
+        const queryText = `
+            INSERT INTO child_profile (first_name, last_name, date_of_birth, gender, date_of_placement, user_id)
+            VALUES ($1, $2, $3, $4, $5, $6) RETURNING child_id`;
+        const { rows } = await pool.query(queryText, [firstName, lastName, dateOfBirth, gender, dateOfPlacement, userId]);
+        res.status(201).json({ childId: rows[0].child_id, message: 'Child profile created successfully' });
     } catch (error) {
-        console.error('Error in PUT /child/:childId', error);
-        res.status(500).send({ error: 'Internal Server Error' });
+        console.error('Error in POST /child', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
 
 // router.post('/', rejectUnauthenticated, async (req, res) => {
 //     console.log(`in POST /child`);
