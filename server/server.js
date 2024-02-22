@@ -11,6 +11,7 @@ const passport = require('./strategies/user.strategy');
 // Route Includes
 const userRouter = require('./routes/user.router');
 const childRouter = require('./routes/child.router');
+const guardianshipRouter = require('./routes/guardianship.router');
 
 // Express Middleware
 app.use(express.json());
@@ -27,6 +28,7 @@ app.use(passport.session());
 // Routes
 app.use('/api/user', userRouter);
 app.use('/api/child', childRouter);
+app.use('/api/guardianship', guardianshipRouter);
 
 // Listen Server & Port
 app.listen(PORT, () => {
