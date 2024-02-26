@@ -10,7 +10,7 @@ const passport = require('./strategies/user.strategy');
 
 // Route Includes
 const userRouter = require('./routes/user.router');
-const childRouter = require('./routes/child.router');
+const servicePartnerRouter = require('./routes/service.partner.router');
 const guardianshipRouter = require('./routes/guardianship.router');
 
 // Express Middleware
@@ -27,7 +27,7 @@ app.use(passport.session());
 
 // Routes
 app.use('/api/user', userRouter);
-app.use('/api/child', childRouter);
+app.use('/api/service_partner', servicePartnerRouter);
 app.use('/api/guardianship', guardianshipRouter);
 
 // Listen Server & Port

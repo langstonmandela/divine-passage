@@ -48,5 +48,9 @@
       "last 1 safari version"
     ]
   },
-  "heroku-run-build-script": true
+  "heroku-run-build-script": true,
+  "description": "This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).",
+  "main": "vite.config.js",
+  "author": "",
+  "license": "ISC"
 }
