@@ -48,6 +48,38 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     }
 });
 
+router.put('/:id', rejectUnauthenticated, async (req, res) => {
+    console.log(`in PUT /service_partner`);
+    const userId = req.user.id; // User ID from Passport session 
+    const servicePartnerId = req.params.id;
+    // const { firstName, lastName, nick_name, dateOfBirth, gender, dateOfPlacement } = req.body;
+    const { nick_name } = req.body;
+
+
+    try {
+        const queryText = `
+        UPDATE "service_partner"
+        SET "nick_name" = $2
+        WHERE "user_id" = $1 and "service_partner_id" = $3;
+        `
+        pool.query(queryText, [userId, nick_name, servicePartnerId])
+        .then(result => {
+            
+            // Return 201 upon successful UPDATE
+            return res.status(201).send(`Updated Service Partner ${servicePartnerId}`);
+            
+        })
+        .catch(error => {
+            console.error('Error in GET /user/:userId/service_partner', error);
+            res.sendStatus(500);
+        });
+    } catch (error) {
+        console.error('Error in PUT /service_partner', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
 
 
 module.exports = router;
