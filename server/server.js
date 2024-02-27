@@ -12,6 +12,7 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const servicePartnerRouter = require('./routes/service.partner.router');
 const guardianshipRouter = require('./routes/guardianship.router');
+const formsAggregatorRouter = require('./routes/forms.aggregator')
 
 // Express Middleware
 app.use(express.json());
@@ -29,6 +30,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/service_partner', servicePartnerRouter);
 app.use('/api/guardianship', guardianshipRouter);
+app.use('/api/forms_aggregator', formsAggregatorRouter);
 
 // Listen Server & Port
 app.listen(PORT, () => {

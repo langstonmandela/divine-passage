@@ -4,7 +4,7 @@ const pool = require('../modules/pool');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 // POST route to add a new guardianship
-router.post('/:id', rejectUnauthenticated, async (req, res) => {
+router.post('/', rejectUnauthenticated, async (req, res) => {
     console.log(`in POST /guardianship`);
     
     // Extract guardianship data from the request body
@@ -19,11 +19,8 @@ router.post('/:id', rejectUnauthenticated, async (req, res) => {
 
     const userId = req.user.id; // User ID from Passport session
 
-    // Start a database transaction
+    
     try {
-        await pool.query('BEGIN');
-
-        // Insert the new guardianship record and return its ID
         const guardianshipQuery = `
             INSERT INTO guardianship (
                 court_order_number,
@@ -36,6 +33,9 @@ router.post('/:id', rejectUnauthenticated, async (req, res) => {
             ) VALUES ($1, $2, $3, $4, $5, $6, $7)
             RETURNING guardianship_id;
         `;
+        await pool.query();
+
+        // Insert the new guardianship record and return its ID
 
         const guardianshipParams = [
             courtOrderNumber,
@@ -50,12 +50,11 @@ router.post('/:id', rejectUnauthenticated, async (req, res) => {
         const guardianshipResult = await pool.query(guardianshipQuery, guardianshipParams);
         const guardianshipId = guardianshipResult.rows[0].guardianship_id;
 
-        // Assuming you want to return the new guardianship ID or other data
+        // We will use guardianshipId, servicePartnerId, userId to insert later
         res.status(201).json({ guardianshipId: guardianshipId, message: 'Guardianship record created successfully' });
 
-        await pool.query('COMMIT');
+        
     } catch (error) {
-        await pool.query('ROLLBACK');
         console.error('Error in POST /guardianship', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }

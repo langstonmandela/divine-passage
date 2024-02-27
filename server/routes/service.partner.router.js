@@ -52,7 +52,7 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
     console.log(`in PUT /service_partner`);
     const userId = req.user.id; // User ID from Passport session 
     const servicePartnerId = req.params.id;
-    // const { firstName, lastName, nick_name, dateOfBirth, gender, dateOfPlacement } = req.body;
+    // const { firstName, lastName, nick_name, dateOfBirth, gender, dateOfPlacement } = req.body; //USE THIS to complete the PUT when ready to refactor
     const { nick_name } = req.body;
 
 
