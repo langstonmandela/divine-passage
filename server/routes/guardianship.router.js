@@ -23,6 +23,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         });
 });
 
+// POST route guardianship to create a 
+// new guardianship for an existing form, service partner, and user ID
 
 router.post('/', rejectUnauthenticated, (req, res) => {
     console.log(`in POST /guardianship`);
@@ -63,6 +65,56 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 
+// PUT updating with the ID provided in the URL
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+    const guardianshipId = req.params.id;
+    const userId = req.user.id; // This is retrieved from the authenticated user session
+    
+    const {
+        servicePartnerId,
+        formsAggregatorId, 
+        courtOrderNumber,
+        cpsWorkerName,
+        cpsWorkerPhone,
+        cpsWorkerEmail
+    } = req.body;
+
+    // Check if formsAggregatorId is provided and is not null
+    console.log('Request body:', req.body);
+    if (!formsAggregatorId) {
+        return res.status(400).json({ error: 'forms_aggregator_id is required and cannot be null' });
+    }
+    
+    const updateQuery = `
+        UPDATE guardianship
+        SET user_id = $1, 
+            service_partner_id = $2, 
+            forms_aggregator_id = $3, 
+            court_order_number = $4, 
+            cps_worker_name = $5, 
+            cps_worker_phone = $6, 
+            cps_worker_email = $7
+        WHERE guardianship_id = $8;
+    `;
+
+    const values = [
+        userId,
+        servicePartnerId, 
+        formsAggregatorId, 
+        courtOrderNumber, 
+        cpsWorkerName, 
+        cpsWorkerPhone, 
+        cpsWorkerEmail, 
+        guardianshipId
+    ];
+
+    pool.query(updateQuery, values)
+        .then(() => res.sendStatus(200))
+        .catch(error => {
+            console.error('Error in PUT /guardianship', error);
+            res.status(500).send('Error updating guardianship record');
+        });
+});
 
 
 module.exports = router;

@@ -55,19 +55,21 @@ CREATE TABLE "guardianship" (
   OIDS=FALSE
 );
 
-DROP TABLE "forms_aggregator";
+-- Stuff that I did around data manipulation we'll clean this out once the backend is wrapped
+
+-- DROP TABLE "forms_aggregator";
 
 
-SELECT * FROM "service_partner" WHERE "user_id" = '1';
+-- SELECT * FROM "service_partner" WHERE "user_id" = '1';
 
-SELECT * FROM "service_partner" WHERE "user_id" = '1' and "service_partner_id" = '6' ;
+-- SELECT * FROM "service_partner" WHERE "user_id" = '1' and "service_partner_id" = '6' ;
 
-UPDATE "service_partner" 
-SET "nick_name" = 'Tawny'
-WHERE "user_id" = '1' and "service_partner_id" = '6' ;
+-- UPDATE "service_partner" 
+-- SET "nick_name" = 'Tawny'
+-- WHERE "user_id" = '1' and "service_partner_id" = '6' ;
 
-INSERT INTO "forms_aggregator" ("user_id", "service_partner_id", "form_type", "status" )
-VALUES ('1', '6', 'guardianship', 'pending') 
-RETURNING "forms_aggregator_id"; 
+-- INSERT INTO "forms_aggregator" ("user_id", "service_partner_id", "form_type", "status" )
+-- VALUES ('1', '6', 'guardianship', 'pending') 
+-- RETURNING "forms_aggregator_id"; 
 
 
