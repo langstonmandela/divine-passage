@@ -45,7 +45,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             cps_worker_email,
             service_partner_id,
             user_id,
-            forms_aggregator_id // Corrected column name
+            forms_aggregator_id
         ) VALUES ($1, $2, $3, $4, $5, $6, $7)
         RETURNING guardianship_id;
     `;
@@ -61,6 +61,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500);
         });
 });
+
 
 
 
