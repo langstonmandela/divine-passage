@@ -19,13 +19,14 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-
+import ServicePartnerPage from '../ServicePartner/ServicePartnerPage';
+import ServicePartnerProfile from '../ServicePartner/ServicePartnerProfile';
 import './App.css';
 
 function App() {
   const dispatch = useDispatch();
 
-  const user = useSelector(store => store.user);
+  const user = useSelector((store) => store.user);
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
@@ -37,14 +38,13 @@ function App() {
         <Nav />
         <Switch>
           {/* Visiting localhost:5173 will redirect to localhost:5173/home */}
-          <Redirect exact from="/" to="/home" />
+          <Redirect exact from='/' to='/home' />
 
           {/* Visiting localhost:5173/about will show the about page. */}
           <Route
             // shows AboutPage at all times (logged in or not)
             exact
-            path="/about"
-          >
+            path='/about'>
             <AboutPage />
           </Route>
 
@@ -55,59 +55,62 @@ function App() {
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
-            path="/user"
-          >
+            path='/user'>
             <UserPage />
           </ProtectedRoute>
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
-            path="/info"
-          >
+            path='/info'>
             <InfoPage />
           </ProtectedRoute>
 
-          <Route
+          <ProtectedRoute
+            // logged in shows Service Partner List Page else shows LoginPage
             exact
-            path="/login"
-          >
-            {user.id ?
-              // If the user is already logged in, 
+            path='/service_partner'>
+            <ServicePartnerPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows Service Partner profile else shows LoginPage
+            exact
+            path='/service_partner/:partnerId'>
+            <ServicePartnerProfile />
+          </ProtectedRoute>
+
+          <Route exact path='/login'>
+            {user.id ? (
+              // If the user is already logged in,
               // redirect to the /user page
-              <Redirect to="/user" />
-              :
+              <Redirect to='/user' />
+            ) : (
               // Otherwise, show the login page
               <LoginPage />
-            }
+            )}
           </Route>
 
-          <Route
-            exact
-            path="/registration"
-          >
-            {user.id ?
-              // If the user is already logged in, 
+          <Route exact path='/registration'>
+            {user.id ? (
+              // If the user is already logged in,
               // redirect them to the /user page
-              <Redirect to="/user" />
-              :
+              <Redirect to='/user' />
+            ) : (
               // Otherwise, show the registration page
               <RegisterPage />
-            }
+            )}
           </Route>
 
-          <Route
-            exact
-            path="/home"
-          >
-            {user.id ?
-              // If the user is already logged in, 
+          <Route exact path='/home'>
+            {user.id ? (
+              // If the user is already logged in,
               // redirect them to the /user page
-              <Redirect to="/user" />
-              :
+              <Redirect to='/user' />
+            ) : (
               // Otherwise, show the Landing page
               <LandingPage />
-            }
+            )}
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}

@@ -49,7 +49,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     ]);
     res.status(201).json({
       servicePartnerId: rows[0].service_partner_id,
-      message: 'Child profile created successfully',
+      message: 'Service Partner profile created successfully',
     });
   } catch (error) {
     console.error('Error in POST /service_partner', error);
@@ -59,19 +59,34 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
 router.put('/:id', rejectUnauthenticated, async (req, res) => {
   console.log(`in PUT /service_partner`);
-  const userId = req.user.id; // User ID from Passport session
+  //   const userId = req.user.id; // User ID from Passport session
   const servicePartnerId = req.params.id;
   // const { firstName, lastName, nick_name, dateOfBirth, gender, dateOfPlacement } = req.body; //USE THIS to complete the PUT when ready to refactor
-  const { nick_name } = req.body;
+  const {
+    firstName,
+    nick_name,
+    lastName,
+    dateOfBirth,
+    gender,
+    dateOfPlacement,
+  } = req.body;
 
   try {
     const queryText = `
         UPDATE "service_partner"
-        SET "nick_name" = $2
-        WHERE "user_id" = $1 and "service_partner_id" = $3;
+        SET "first_name" = $1, "nick_name" = $2, "last_name" = $3, "date_of_birth" = $4, "gender" = $5, "date_of_placement" = $6 
+        WHERE "service_partner_id" = $7;
         `;
     pool
-      .query(queryText, [userId, nick_name, servicePartnerId])
+      .query(queryText, [
+        firstName,
+        nick_name,
+        lastName,
+        dateOfBirth,
+        gender,
+        dateOfPlacement,
+        servicePartnerId,
+      ])
       .then((result) => {
         // Return 201 upon successful UPDATE
         return res
@@ -79,7 +94,7 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
           .send(`Updated Service Partner ${servicePartnerId}`);
       })
       .catch((error) => {
-        console.error('Error in GET /user/:userId/service_partner', error);
+        console.error('Error in Update /user/service_partner', error);
         res.sendStatus(500);
       });
   } catch (error) {
