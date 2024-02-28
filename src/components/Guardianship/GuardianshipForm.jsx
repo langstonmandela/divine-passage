@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { dateStrip } from '../../utils/helper';
+
 
 function GuardianshipForm({ guardianship }) {
     const dispatch = useDispatch();
-    const [servicePartners, setServicePartners] = useState([]);
+    
     const initialGuardianship = {
         courtOrderNumber: guardianship?.court_order_number ?? '',
         cpsWorkerName: guardianship?.cps_worker_name ?? '',
@@ -13,8 +14,8 @@ function GuardianshipForm({ guardianship }) {
         servicePartnerId: guardianship?.service_partner_id ?? '',
     };
     const [guardianshipData, setGuardianshipData] = useState(initialGuardianship);
-
-
+    const servicePartners = useSelector ( store => store.servicePartners )
+    console.log(servicePartners);
     const handleSubmit = (event) => {
         event.preventDefault();
         // dispatch saga
@@ -74,9 +75,9 @@ function GuardianshipForm({ guardianship }) {
                     onChange={(event) => setGuardianshipData({ ...guardianshipData, servicePartnerId: event.target.value })}
                 >
                     <option value="">Select Service Partner</option>
-                    {servicePartners.map((partner) => (
+                    {servicePartners?.map((partner) => (
                         <option key={partner.id} value={partner.id}>
-                            {partner.name}
+                            {partner.nick_name}: {partner.first_name}, { partner.last_name}
                         </option>
                     ))}
                 </select>
