@@ -15,7 +15,7 @@ function* fetchGuardianship(action) {
 function* createGuardianship(action) {
     try {
         yield axios.post('/api/guardianship', action.payload);
-        yield put({ type: 'FETCH_GUARDIANSHIPS', payload: action.payload });
+        yield put({ type: 'FETCH_GUARDIANSHIP', payload: action.payload });
     } catch (error) {
         console.log('Guardianship post request failed', error);
     }
@@ -24,7 +24,7 @@ function* createGuardianship(action) {
 function* updateGuardianship(action) {
     try {
         yield axios.put(`/api/guardianship/${action.payload.guardianshipId}`, action.payload);
-        yield put({ type: 'FETCH_GUARDIANSHIPS', payload: { userId: action.payload.userId } });
+        yield put({ type: 'FETCH_GUARDIANSHIP', payload: { userId: action.payload.userId } });
     } catch (error) {
         console.log('Guardianship update request failed', error);
     }
@@ -33,7 +33,7 @@ function* updateGuardianship(action) {
 function* deleteGuardianship(action) {
     try {
         yield axios.delete(`/api/guardianship/${action.payload.guardianshipId}`);
-        yield put({ type: 'FETCH_GUARDIANSHIPS', payload: { userId: action.payload.userId } });
+        yield put({ type: 'FETCH_GUARDIANSHIP', payload: { userId: action.payload.userId } });
     } catch (error) {
         console.log('Guardianship delete request failed', error);
     }
@@ -41,7 +41,7 @@ function* deleteGuardianship(action) {
 
 
 function* guardianshipSaga() {
-    yield takeEvery('FETCH_GUARDIANSHIPS', fetchGuardianship);
+    yield takeEvery('FETCH_GUARDIANSHIP', fetchGuardianship);
     yield takeLatest('CREATE_GUARDIANSHIP', createGuardianship);
     yield takeLatest('UPDATE_GUARDIANSHIP', updateGuardianship);
     yield takeLatest('DELETE_GUARDIANSHIP', deleteGuardianship);

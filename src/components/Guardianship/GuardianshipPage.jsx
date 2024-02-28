@@ -7,7 +7,7 @@ function GuardianshipPage() {
     const dispatch = useDispatch();
     const guardianships = useSelector((store) => store.guardianships); 
     useEffect(() => {
-        dispatch({ type: 'FETCH_GUARDIANSHIPS' }); // Dispatch action to fetch guardianships
+        dispatch({ type: 'FETCH_GUARDIANSHIP' }); // Dispatch action to fetch guardianships
     }, [dispatch]);
 
     return (
