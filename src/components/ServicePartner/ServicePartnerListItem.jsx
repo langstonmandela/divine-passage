@@ -15,7 +15,7 @@ function ServicePartnerListItem({ partner }) {
         {partner?.last_name}, {partner?.first_name} -
         <span> Date Placed {dateStrip(partner?.date_of_placement)}</span>
       </p>
-      <button onClick={handleProfile}>Profile</button>
+      <button onClick={handleProfile}>Open Profile</button>
     </div>
   );
 }
