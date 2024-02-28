@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ServicePartnerPage from '../ServicePartner/ServicePartnerPage';
 import ServicePartnerProfile from '../ServicePartner/ServicePartnerProfile';
+import GuardianshipPage from '../Guardianship/GuardianshipPage';
 import './App.css';
 
 function App() {
@@ -78,6 +79,11 @@ function App() {
             exact
             path='/service_partner/:partnerId'>
             <ServicePartnerProfile />
+          </ProtectedRoute>
+
+          <ProtectedRoute 
+          exact path='/guardianship'>
+            <GuardianshipPage />
           </ProtectedRoute>
 
           <Route exact path='/login'>
