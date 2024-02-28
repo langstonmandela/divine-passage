@@ -22,6 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import ServicePartnerPage from '../ServicePartner/ServicePartnerPage';
 import ServicePartnerProfile from '../ServicePartner/ServicePartnerProfile';
 import GuardianshipPage from '../Guardianship/GuardianshipPage';
+import IntakePage from '../Intake/IntakePage';
 import './App.css';
 
 function App() {
@@ -65,6 +66,13 @@ function App() {
             exact
             path='/info'>
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in IntakePage: hub to then go to user profile, view forms, view service partners
+            exact
+            path='/intake/:partnerId'>
+            <IntakePage />
           </ProtectedRoute>
 
           <ProtectedRoute

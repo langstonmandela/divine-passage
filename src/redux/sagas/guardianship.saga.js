@@ -15,7 +15,7 @@ function* fetchGuardianship(action) {
 function* createGuardianship(action) {
     try {
         yield axios.post('/api/guardianship', action.payload);
-        yield put({ type: 'FETCH_GUARDIANSHIP', payload: action.payload });
+        yield put({ type: 'FETCH_GUARDIANSHIP'});
     } catch (error) {
         console.log('Guardianship post request failed', error);
     }

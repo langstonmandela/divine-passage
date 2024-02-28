@@ -12,6 +12,7 @@ function GuardianshipForm({ guardianship }) {
         cpsWorkerPhone: guardianship?.cps_worker_phone ?? '',
         cpsWorkerEmail: guardianship?.cps_worker_email ?? '',
         servicePartnerId: guardianship?.service_partner_id ?? '',
+        formId: guardianship?.forms_aggregator_id ?? '3',
     };
     const [guardianshipData, setGuardianshipData] = useState(initialGuardianship);
     const servicePartners = useSelector ( store => store.servicePartners )
@@ -27,6 +28,7 @@ function GuardianshipForm({ guardianship }) {
         } else {
             dispatch({ type: 'CREATE_GUARDIANSHIP', payload: guardianshipData });
             setGuardianshipData(initialGuardianship);
+            console.log(guardianshipData);
         }
         alert(`${guardianshipData.servicePartnerId}'s Guardianship form to /guardianship`)
     };
@@ -76,7 +78,7 @@ function GuardianshipForm({ guardianship }) {
                 >
                     <option value="">Select Service Partner</option>
                     {servicePartners?.map((partner) => (
-                        <option key={partner.id} value={partner.id}>
+                        <option key={partner.id} value={partner.service_partner_id}>
                             {partner.nick_name}: {partner.first_name}, { partner.last_name}
                         </option>
                     ))}

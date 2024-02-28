@@ -28,12 +28,10 @@ function ServicePartnerProfile() {
             <ServicePartnerForm partner={partner} />
             <hr />
             <div>
-                <button onClick={() => history.push(`/form_aggregator/${partnerId}`)}>
-                    Start Form Aggregator for {partner?.first_name}
+                <button onClick={() => history.push(`/intake/${partnerId}`)}>
+                    Start an Intake packet for {partner?.first_name}
                 </button>
-                <button onClick={() => history.push(`/guardianship/${partnerId}`)}>
-                    Add Guardianship +
-                </button>
+                
             </div>
         </div>
     );
