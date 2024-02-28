@@ -7,7 +7,6 @@ import { dateStrip } from '../../utils/helper';
 function ServicePartnerListItem({ partner }) {
   const history = useHistory();
   const handleProfile = () => {
-    console.log(`goto ${partner.service_partner_id} profile page`);
     history.push(`/service_partner/${partner.service_partner_id}`);
   };
   return (
