@@ -1,16 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { dateStrip } from '../../utils/helper';
 // this component is to create a new service partner
 function ServicePartnerForm({ partner }) {
   console.log('Partner', partner);
   const dispatch = useDispatch();
   //endpoint post /server_partner
-  const dateStrip = (str) => {
-    // '2024-02-27T06:00:00.000Z' strip off T -> end
-    // the input cannot read the date w/ the time
-    return str?.slice(0, str.indexOf('T'));
-  };
+
   const initialProfile = {
     firstName: partner?.first_name ?? '',
     nick_name: partner?.nick_name ?? '',
