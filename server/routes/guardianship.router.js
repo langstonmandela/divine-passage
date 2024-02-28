@@ -10,10 +10,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
     console.log(`Logged in User`, userId);
     const queryText = `
-    SELECT * FROM "guardianship" WHERE "user_id" = $1;
+    SELECT * FROM "guardianship";
     `;
     
-    pool.query(queryText, [userId])
+    pool.query(queryText)
         .then(result => {
             res.send(result.rows);
         })
@@ -67,12 +67,12 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 // PUT updating with the ID provided in the URL
 router.put('/:id', rejectUnauthenticated, (req, res) => {
+    console.log(`in PUT /guardianship/:id`);
+
     const guardianshipId = req.params.id;
-    const userId = req.user.id; // This is retrieved from the authenticated user session
+    // const userId = req.user.id; // This is retrieved from the authenticated user session
     
     const {
-        servicePartnerId,
-        formsAggregatorId, 
         courtOrderNumber,
         cpsWorkerName,
         cpsWorkerPhone,
@@ -81,26 +81,20 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
 
     // Check if formsAggregatorId is provided and is not null
     console.log('Request body:', req.body);
-    if (!formsAggregatorId) {
-        return res.status(400).json({ error: 'forms_aggregator_id is required and cannot be null' });
-    }
+    
     
     const updateQuery = `
-        UPDATE guardianship
-        SET user_id = $1, 
-            service_partner_id = $2, 
-            forms_aggregator_id = $3, 
-            court_order_number = $4, 
-            cps_worker_name = $5, 
-            cps_worker_phone = $6, 
-            cps_worker_email = $7
-        WHERE guardianship_id = $8;
+        UPDATE guardianship 
+        SET 
+            court_order_number = $1, 
+            cps_worker_name = $2, 
+            cps_worker_phone = $3, 
+            cps_worker_email = $4
+        WHERE guardianship_id = $5;
     `;
 
     const values = [
-        userId,
-        servicePartnerId, 
-        formsAggregatorId, 
+        
         courtOrderNumber, 
         cpsWorkerName, 
         cpsWorkerPhone, 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import axios from 'axios';
+import { dateStrip } from '../../utils/helper';
 
 function GuardianshipForm({ guardianship }) {
     const dispatch = useDispatch();
@@ -10,36 +10,26 @@ function GuardianshipForm({ guardianship }) {
         cpsWorkerName: guardianship?.cps_worker_name ?? '',
         cpsWorkerPhone: guardianship?.cps_worker_phone ?? '',
         cpsWorkerEmail: guardianship?.cps_worker_email ?? '',
-        childId: guardianship?.child_id ?? '',
         servicePartnerId: guardianship?.service_partner_id ?? '',
     };
     const [guardianshipData, setGuardianshipData] = useState(initialGuardianship);
 
-    useEffect(() => {
-        const fetchServicePartners = async () => {
-            try {
-                const response = await axios.get('/api/service-partners');
-                setServicePartners(response.data);
-            } catch (error) {
-                console.error('Failed to fetch service partners', error);
-            }
-        };
-
-        fetchServicePartners();
-    }, []);
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        // dispatch saga
         if (guardianship) {
             dispatch({
                 type: 'UPDATE_GUARDIANSHIP',
-                payload: { ...guardianshipData, guardianshipId: guardianship.guardianship_id },
+                payload: { ...guardianshipData, guardianship_id: guardianship.guardianship_id },
             });
         } else {
             dispatch({ type: 'CREATE_GUARDIANSHIP', payload: guardianshipData });
             setGuardianshipData(initialGuardianship);
         }
+        alert(`${guardianshipData.servicePartnerId}'s Guardianship form to /guardianship`)
     };
+
 
     return (
         <div>

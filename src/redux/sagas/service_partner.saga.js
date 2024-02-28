@@ -5,7 +5,7 @@ import { put, takeEvery, takeLatest } from 'redux-saga/effects';
 function* fetchServicePartner() {
     try {
         const response = yield axios.get('/api/service_partner');
-        yield put({ type: 'SET_SERVICE_PARTNER', payload: response.data });
+        yield put({ type: 'SET_SERVICE_PARTNER', payload: response.data});
     } catch (error) {
         console.log('Service Partner get request failed', error);
     }
