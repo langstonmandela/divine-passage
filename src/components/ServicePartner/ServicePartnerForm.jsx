@@ -31,10 +31,10 @@ function ServicePartnerForm({ partner }) {
       });
     } else {
       dispatch({ type: 'CREATE_SERVICE_PARTNER', payload: profile });
+      setProfile(initialProfile);
     }
 
     alert(`${profile.firstName}'s form to /service_partner`);
-    setProfile(initialProfile);
   };
   return (
     <div>
@@ -101,7 +101,7 @@ function ServicePartnerForm({ partner }) {
           }
         />
 
-        <button>Submit Profile</button>
+        <button>{partner ? 'Update' : 'Create'}</button>
       </form>
     </div>
   );
