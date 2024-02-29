@@ -40,13 +40,13 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     pool.query(queryText, [userId, service_partner_id, form_type, status])
         .then(result => {
         const formsAggregatorId = result.rows[0].forms_aggregator_id;
-        console.log(`you've created a packet with id ${formsAggregatorId}`);
+        // console.log(`you've created a packet with id ${formsAggregatorId}`);
             
-            pool.query()// Here we will take the Returned form agg id and use that to insert on the guardianship table
+        //     pool.query()// Here we will take the Returned form agg id and use that to insert on the guardianship table
             res.sendStatus(201);
         })
         .catch(error => {
-            console.error('Error in POST /user/:userId/service_partner', error);
+            console.error('Error in POST /intake', error);
             res.sendStatus(500);
         });
 });

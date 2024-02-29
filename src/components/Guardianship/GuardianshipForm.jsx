@@ -3,20 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { dateStrip } from '../../utils/helper';
 
 
-function GuardianshipForm({ guardianship }) {
+function GuardianshipForm({ guardianship, partnerId, intakeId }) {
     const dispatch = useDispatch();
-    
+    console.log(partnerId, intakeId);
     const initialGuardianship = {
         courtOrderNumber: guardianship?.court_order_number ?? '',
         cpsWorkerName: guardianship?.cps_worker_name ?? '',
         cpsWorkerPhone: guardianship?.cps_worker_phone ?? '',
         cpsWorkerEmail: guardianship?.cps_worker_email ?? '',
-        servicePartnerId: guardianship?.service_partner_id ?? '',
-        formId: guardianship?.forms_aggregator_id ?? '3',
+        servicePartnerId: guardianship?.service_partner_id ?? partnerId,
+        formId: guardianship?.forms_aggregator_id ?? intakeId
     };
     const [guardianshipData, setGuardianshipData] = useState(initialGuardianship);
-    const servicePartners = useSelector ( store => store.servicePartners )
-    console.log(servicePartners);
+    // const servicePartners = useSelector ( store => store.servicePartners )
+
     const handleSubmit = (event) => {
         event.preventDefault();
         // dispatch saga
@@ -26,9 +26,10 @@ function GuardianshipForm({ guardianship }) {
                 payload: { ...guardianshipData, guardianship_id: guardianship.guardianship_id },
             });
         } else {
+            console.log('Creaeting a NEW Guardianship', guardianshipData );
             dispatch({ type: 'CREATE_GUARDIANSHIP', payload: guardianshipData });
             setGuardianshipData(initialGuardianship);
-            console.log(guardianshipData);
+            
         }
         alert(`${guardianshipData.servicePartnerId}'s Guardianship form to /guardianship`)
     };
@@ -70,7 +71,8 @@ function GuardianshipForm({ guardianship }) {
                     value={guardianshipData.cpsWorkerEmail}
                     onChange={(event) => setGuardianshipData({ ...guardianshipData, cpsWorkerEmail: event.target.value })}
                 />
-                <select
+                {/* This selector for Service partners will be useful at some point */}
+                {/* <select
                     required
                     id="servicePartnerId"
                     value={guardianshipData.servicePartnerId}
@@ -82,7 +84,7 @@ function GuardianshipForm({ guardianship }) {
                             {partner.nick_name}: {partner.first_name}, { partner.last_name}
                         </option>
                     ))}
-                </select>
+                </select> */}
                 
                 <button type="submit">{guardianship ? 'Update' : 'Create'}</button>
             </form>

@@ -90,7 +90,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute 
-          exact path='/guardianship'>
+          exact path='/guardianship/:partnerId/:intakeId'>
             <GuardianshipPage />
           </ProtectedRoute>
 

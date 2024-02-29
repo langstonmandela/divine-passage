@@ -12,8 +12,19 @@ function* fetchIntake(action) {
     }
 }
 
+function* createIntake(action) {
+    try{
+        console.log('Payload: Service Partner ID', action.payload);
+        yield axios.post('api/intake', action.payload);
+        yield put({type: 'FETCH_INTAKE'}); 
+    } catch (error) {
+        console.log('Intake post request failed', error);
+    }
+}
+
 function* intakeSaga(){
     yield takeEvery  ('FETCH_INTAKE', fetchIntake);
+    yield takeEvery  ('CREATE_INTAKE', createIntake);
 }
 
 export default intakeSaga;
