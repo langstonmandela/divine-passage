@@ -3,7 +3,23 @@ const router = express.Router();
 const pool = require('../modules/pool');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
+// GET route retrieve all Intake forms in the database
+router.get('/', rejectUnauthenticated, (req, res) =>{
+    console.log(`in GET /intake`);
+    const queryText =`
+    SELECT * FROM "forms_aggregator";
+    `;
 
+    pool.query(queryText)
+        .then(result => {
+            res.send(result.rows);
+        })
+        .catch(error =>{
+            console.error('Error in GET /intake', error);
+            res.sendStatus(500);
+        });
+});
+// POST route
 router.post('/', rejectUnauthenticated, (req, res) => {
     console.log(`in POST /forms_aggregator`);
     const userId = req.user.id;
