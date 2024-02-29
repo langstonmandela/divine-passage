@@ -23,7 +23,9 @@ import ServicePartnerPage from '../ServicePartner/ServicePartnerPage';
 import ServicePartnerProfile from '../ServicePartner/ServicePartnerProfile';
 import GuardianshipPage from '../Guardianship/GuardianshipPage';
 import IntakePage from '../Intake/IntakePage';
+import GuardianshipDetails from '../Guardianship/GuardianshipDetails';
 import './App.css';
+import GuardianshipForm from '../Guardianship/GuardianshipForm';
 
 function App() {
   const dispatch = useDispatch();
@@ -88,11 +90,17 @@ function App() {
             path='/service_partner/:partnerId'>
             <ServicePartnerProfile />
           </ProtectedRoute>
+          
+          <ProtectedRoute 
+          exact path='/guardianship/edit/:partnerId'>
+            <GuardianshipDetails />
+          </ProtectedRoute>
 
           <ProtectedRoute 
           exact path='/guardianship/:partnerId/:intakeId'>
             <GuardianshipPage />
           </ProtectedRoute>
+
 
           <Route exact path='/login'>
             {user.id ? (
