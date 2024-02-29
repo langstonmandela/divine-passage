@@ -8,7 +8,7 @@ function ServicePartnerPage() {
     const servicePartners = useSelector((store) => store.servicePartners);
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_SERVICE_PARTNERS' }); // Ensuring action type is consistent with expected Redux action
+        dispatch({ type: 'FETCH_SERVICE_PARTNER' }); // Ensuring action type is consistent with expected Redux action
     }, [dispatch]); // Adding dispatch to dependency array as a best practice
 
     return (
