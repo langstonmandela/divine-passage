@@ -90,17 +90,14 @@ function App() {
             path='/service_partner/:partnerId'>
             <ServicePartnerProfile />
           </ProtectedRoute>
-          
-          <ProtectedRoute 
-          exact path='/guardianship/edit/:partnerId'>
+
+          <ProtectedRoute exact path='/guardianship/edit/:guardianshipId'>
             <GuardianshipDetails />
           </ProtectedRoute>
 
-          <ProtectedRoute 
-          exact path='/guardianship/:partnerId/:intakeId'>
+          <ProtectedRoute exact path='/guardianship/:partnerId/:intakeId'>
             <GuardianshipPage />
           </ProtectedRoute>
-
 
           <Route exact path='/login'>
             {user.id ? (
