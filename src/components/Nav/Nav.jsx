@@ -1,22 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import './Nav.css';
 import { useSelector } from 'react-redux';
 
 function Nav() {
   const user = useSelector((store) => store.user);
 
   return (
-    <div className='nav'>
-      <Link to='/home'>
-        <h2 className='nav-title'>Prime Solo Project</h2>
-      </Link>
-      <div>
+    <div className="w3-bar w3-purple">
+      <Link to="/home" className="w3-bar-item w3-button w3-large">D.I.V.I.N.E. Passage</Link>
+      <div className="w3-right">
         {/* If no user is logged in, show these links */}
         {!user.id && (
-          // If there's no user, show login/registration links
-          <Link className='navLink' to='/login'>
+          <Link className="w3-bar-item w3-button" to="/login">
             Login / Register
           </Link>
         )}
@@ -24,25 +20,15 @@ function Nav() {
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
-            <Link className='navLink' to='/user'>
-              Home
-            </Link>
-
-            <Link className='navLink' to='/info'>
-              Info Page
-            </Link>
-
-            <Link className='navLink' to='/service_partner'>
-              Service Partner Page
-            </Link>
-
-            <LogOutButton className='navLink' />
+            <Link className="w3-bar-item w3-button" to="/user">Home</Link>
+            <Link className="w3-bar-item w3-button" to="/info">Info Page</Link>
+            <Link className="w3-bar-item w3-button" to="/service_partner">Service Partner Page</Link>
+            {/* Assuming LogOutButton is adaptable to being styled by W3.CSS */}
+            <LogOutButton className="w3-bar-item w3-button" />
           </>
         )}
 
-        <Link className='navLink' to='/about'>
-          About
-        </Link>
+        <Link className="w3-bar-item w3-button" to="/about">About</Link>
       </div>
     </div>
   );
