@@ -32,8 +32,8 @@ function* updateGuardianship(action) {
 
 function* deleteGuardianship(action) {
     try {
-        yield axios.delete(`/api/guardianship/${action.payload.guardianshipId}`);
-        yield put({ type: 'FETCH_GUARDIANSHIP', payload: { userId: action.payload.userId } });
+        yield axios.delete(`/api/guardianship/${action.payload}`);
+        yield put({ type: 'FETCH_GUARDIANSHIP' });
     } catch (error) {
         console.log('Guardianship delete request failed', error);
     }

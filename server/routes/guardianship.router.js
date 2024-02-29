@@ -110,5 +110,30 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
         });
 });
 
+// DELETE with the ID provided in the URL
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+    console.log(`in DELETE /guardianship/:id`);
+
+    const guardianshipId = req.params.id;
+    // const userId = req.user.id; // This is retrieved from the authenticated user session
+    console.log(`Guardianship ID:`, guardianshipId);
+
+    
+    
+    
+    const updateQuery = `
+    DELETE FROM "guardianship"
+    WHERE "guardianship_id" = $1;
+    `;
+
+
+    pool.query(updateQuery,[guardianshipId])
+        .then(() => res.sendStatus(204))
+        .catch(error => {
+            console.error('Error in DELETE /guardianship', error);
+            res.status(500).send('Error DELETING guardianship record');
+        });
+});
+
 
 module.exports = router;
