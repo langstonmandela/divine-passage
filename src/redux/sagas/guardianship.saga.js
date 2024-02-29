@@ -8,7 +8,7 @@ function* fetchGuardianship(action) {
         console.log(response.data);
         yield put({ type: 'SET_GUARDIANSHIP', payload: response.data });
     } catch (error) {
-        console.log('Guardianship get request failed', error);
+        console.log('Guardianship GET request failed', error);
     }
 }
 

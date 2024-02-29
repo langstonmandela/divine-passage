@@ -3,6 +3,7 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import servicePartners from './service.partner.reducer'
 import guardianships from './guardianship.reducer'
+import intakeReducer from './intake.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
   servicePartners,
-  guardianships
+  guardianships,
+  intakeReducer
 });
 
 export default rootReducer;

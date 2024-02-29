@@ -3,9 +3,9 @@ const guardianshipReducer = (state = [], action) => {
         case 'SET_GUARDIANSHIP':
             // Set the guardianship data into the state
             return action.payload;
-        case 'CLEAR_GUARDIANSHIP':
-            // Clear the guardianship data
-            return [];
+        // case 'CLEAR_GUARDIANSHIP':
+        //     // Clear the guardianship data
+        //     return [];
         default:
             return state;
     }
