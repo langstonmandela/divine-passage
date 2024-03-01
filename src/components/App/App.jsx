@@ -26,7 +26,7 @@ import IntakePage from '../Intake/IntakePage';
 import GuardianshipDetails from '../Guardianship/GuardianshipDetails';
 import './App.css';
 import GuardianshipForm from '../Guardianship/GuardianshipForm';
-
+import ServicePartnerForm from '../ServicePartner/ServicePartnerForm';
 function App() {
   const dispatch = useDispatch();
 
@@ -82,6 +82,13 @@ function App() {
             exact
             path='/service_partner'>
             <ServicePartnerPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows Service Partner profile else shows LoginPage
+            exact
+            path='/service_partner/new'>
+            <ServicePartnerForm partner={undefined} />
           </ProtectedRoute>
 
           <ProtectedRoute

@@ -1,12 +1,13 @@
+import React from 'react';
 import GuardianshipListItem from './GuardianshipListItem';
 
 function GuardianshipList({ guardianships }) {
     return (
-        <div>
-            <h2>Guardianships List</h2>
+        <div className="w3-container w3-margin">
+            <h2 className="w3-text-teal">Guardianships List</h2>
             {guardianships?.length > 0 ? (
-                <ul>
-                    {guardianships?.map((guardianship) => (
+                <ul className="w3-ul">
+                    {guardianships.map((guardianship) => (
                         <GuardianshipListItem
                             key={guardianship.guardianship_id}
                             guardianship={guardianship}
@@ -14,7 +15,7 @@ function GuardianshipList({ guardianships }) {
                     ))}
                 </ul>
             ) : (
-                <p>Loading...</p>
+                <p className="w3-text-grey">Loading...</p>
             )}
         </div>
     );
