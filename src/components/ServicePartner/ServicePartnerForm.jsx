@@ -94,12 +94,11 @@ function ServicePartnerForm({ partner }) {
                     value={profile.dateOfPlacement}
                     onChange={(event) => setProfile({ ...profile, dateOfPlacement: event.target.value })}
                 />
-
+                <button className="w3-btn w3-green w3-round w3-margin-top">{partner ? 'Update' : 'Create'}</button>
                 <button
-                    className="w3-button w3-khaki w3-round w3-margin-top w3-margin-left"
+                    className="w3-button w3-right w3-khaki w3-round w3-margin-top w3-margin-left"
                     style={{ marginTop: '16px' }}
                     onClick={() => history.push('/service_partner/')}>Back to Provider List</button>
-                <button className="w3-btn w3-green w3-round w3-margin-top">{partner ? 'Update' : 'Create'}</button>
             </form>
         </div>
     );
