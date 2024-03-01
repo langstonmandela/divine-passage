@@ -38,8 +38,8 @@ function App() {
 
   return (
     <Router>
-      <div>
-        <Nav />
+      <Nav />
+      <div className="w3-container">
         <Switch>
           {/* Visiting localhost:5173 will redirect to localhost:5173/home */}
           <Redirect exact from='/' to='/home' />
@@ -56,12 +56,12 @@ function App() {
             Visiting localhost:5173/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:5173/user */}
-          <ProtectedRoute
+          {/* <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
             path='/user'>
             <UserPage />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
@@ -110,7 +110,7 @@ function App() {
             {user.id ? (
               // If the user is already logged in,
               // redirect to the /user page
-              <Redirect to='/user' />
+              <Redirect to='/' />
             ) : (
               // Otherwise, show the login page
               <LoginPage />
@@ -121,7 +121,7 @@ function App() {
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /user page
-              <Redirect to='/user' />
+              <Redirect to='/' />
             ) : (
               // Otherwise, show the registration page
               <RegisterPage />
@@ -132,7 +132,7 @@ function App() {
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /user page
-              <Redirect to='/user' />
+              <Redirect to='/service_partner' />
             ) : (
               // Otherwise, show the Landing page
               <LandingPage />

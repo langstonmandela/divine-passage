@@ -23,9 +23,9 @@ function RegisterForm() {
     <form className="formPanel" onSubmit={registerUser}>
       <h2>Register User</h2>
       {errors.registrationMessage && (
-        <h3 className="alert" role="alert">
-          {errors.registrationMessage}
-        </h3>
+        <div className="w3-panel w3-red">
+          <p>{errors.registrationMessage}</p>
+        </div>
       )}
       <div>
         <label htmlFor="username">

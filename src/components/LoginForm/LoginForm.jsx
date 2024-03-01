@@ -28,9 +28,9 @@ function LoginForm() {
     <form className="formPanel" onSubmit={login}>
       <h2>Login</h2>
       {errors.loginMessage && (
-        <h3 className="alert" role="alert">
-          {errors.loginMessage}
-        </h3>
+        <div className="w3-panel w3-red">
+          <p>{errors.loginMessage}</p>
+        </div>
       )}
       <div>
         <label htmlFor="username">

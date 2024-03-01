@@ -9,15 +9,23 @@ function ServicePartnerListItem({ partner }) {
         history.push(`/service_partner/${partner.service_partner_id}`);
     };
 
-    
+
     return (
-        <div className="w3-container w3-padding">
-            <p className="w3-large">
-                {partner?.last_name}, {partner?.first_name} -
-                <span className="w3-text-grey"> Date Placed {dateStrip(partner?.date_of_placement)}</span>
-            </p>
-            <button className="w3-button w3-teal" onClick={handleProfile}>Open Profile</button>
-        </div>
+        <tr>
+            <td className="w3-large">
+                {partner?.last_name}, {partner?.first_name} 
+                {/* <span className="w3-text-grey"> Date Placed {dateStrip(partner?.date_of_placement)}</span> */}
+            </td>
+            <td>
+                {partner?.nick_name}
+            </td>
+            <td>
+                {dateStrip(partner?.date_of_placement)}
+            </td>
+            <td>
+                <button className="w3-button w3-teal" onClick={handleProfile}>Open Profile</button>
+            </td>
+        </tr>
     );
 }
 

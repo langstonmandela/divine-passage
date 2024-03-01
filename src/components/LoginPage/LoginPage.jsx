@@ -6,10 +6,10 @@ function LoginPage() {
   const history = useHistory();
 
   return (
-    <div>
+    <div className="w3-row">
       <LoginForm />
 
-      <center>
+      <div className="w3-center">
         <button
           type="button"
           className="btn btn_asLink"
@@ -19,7 +19,7 @@ function LoginPage() {
         >
           Register
         </button>
-      </center>
+      </div>
     </div>
   );
 }

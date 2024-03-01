@@ -7,13 +7,10 @@ function ServicePartnerPage() {
     const dispatch = useDispatch();
     const servicePartners = useSelector((store) => store.servicePartners);
 
-    useEffect(() => {
-        // dispatch({ type: 'FETCH_SERVICE_PARTNER' }); // Ensuring action type is consistent with expected Redux action
-    }, [dispatch]); // Adding dispatch to dependency array as a best practice
-
     return (
         <div className="w3-container w3-margin-top">
-            <h2 className="w3-text-teal">Service Partners</h2>
+            <h1 className="w3-text-teal">My Dashboard</h1>
+            <p>Welcome! Here are your service providers</p>
             {/* Wrapper for form and list could be added here if needed for layout purposes */}
             <ServicePartnerList servicePartners={servicePartners} />
             {/* <ServicePartnerForm partner={undefined} /> */}

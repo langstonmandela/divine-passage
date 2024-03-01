@@ -7,21 +7,31 @@ function ServicePartnerList({ servicePartners }) {
     return (
         <div className="w3-container">
             <h2 className="w3-text-teal">Service Partners List</h2>
-            <button 
+            <button
                 onClick={() => history.push('/service_partner/new')}
-                className="w3-button w3-teal"
+                className="w3-button w3-tiny w3-blue-grey w3-round"
             >
-                    Add Service Partner
+                Add Service Partner
             </button>
             {servicePartners?.length > 0 ? (
-                <ul className="w3-ul w3-card-4 w3-margin-top">
+                <table className="w3-table-all w3-margin-top">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Nickname</th>
+                            <th>Date Placed</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     {servicePartners?.map((partner) => (
                         <ServicePartnerListItem
                             key={partner.service_partner_id}
                             partner={partner}
                         />
                     ))}
-                </ul>
+                    </tbody>
+                </table>
             ) : (
                 <p className="w3-text-grey">Loading...</p>
             )}

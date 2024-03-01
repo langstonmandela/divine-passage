@@ -32,9 +32,9 @@ function ServicePartnerForm({ partner }) {
     };
 
     return (
-        <div className="w3-container w3-margin">
+        <div className="w3-auto w3-padding">
             <h2 className="w3-text-teal">Service Partner Form</h2>
-            <form className="w3-container" onSubmit={handleSubmit}>
+            <form className="w3-card w3-padding" onSubmit={handleSubmit}>
                 <label htmlFor="firstName" className="w3-text-teal">First Name</label>
                 <input
                     className="w3-input w3-border"
@@ -95,11 +95,11 @@ function ServicePartnerForm({ partner }) {
                     onChange={(event) => setProfile({ ...profile, dateOfPlacement: event.target.value })}
                 />
 
-                <button className="w3-btn w3-teal w3-margin-top">{partner ? 'Update' : 'Create'}</button>
                 <button
-                    className="w3-button w3-khaki w3-margin-top w3-margin-left"
+                    className="w3-button w3-khaki w3-round w3-margin-top w3-margin-left"
                     style={{ marginTop: '16px' }}
                     onClick={() => history.push('/service_partner/')}>Back to Provider List</button>
+                <button className="w3-btn w3-green w3-round w3-margin-top">{partner ? 'Update' : 'Create'}</button>
             </form>
         </div>
     );
