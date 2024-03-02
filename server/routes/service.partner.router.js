@@ -8,7 +8,8 @@ const {
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log(`in GET /service_partner`);
     const queryText = `
-    SELECT * FROM "service_partner";
+        SELECT "service_partner".*, "username" AS "team_member" FROM "service_partner"
+        JOIN "user" ON "user"."id"="service_partner"."user_id";
     `;
     pool
         .query(queryText)

@@ -7,7 +7,8 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 router.get('/', rejectUnauthenticated, (req, res) =>{
     console.log(`in GET /intake`);
     const queryText =`
-    SELECT * FROM "forms_aggregator";
+    SELECT "forms_aggregator".*, "username" AS "team_member" FROM "forms_aggregator"
+    JOIN "user" ON "user"."id"="forms_aggregator"."user_id";
     `;
 
     pool.query(queryText)

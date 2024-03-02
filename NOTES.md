@@ -3,7 +3,7 @@
 ## Notes for next steps:
    - [x] Move dispatched actions to use login saga to fix refresh bugs
    - [ ] Update `<p>` tags at the top of each page to include relevant information / instructions etc.
-   - [ ] Add a JOIN for service providers to bring forward user information
+   - [x] Add a JOIN for service providers to bring forward user information
 
 Polish/Styling:
    - [ ] Ensure all buttons have `w3-rounded`
@@ -21,7 +21,6 @@ Polish/Styling:
 Cleanup:
    - [ ] Make sure all buttons in the project are styled
       - [ ] Welcome Page, Login, Register, etc.
-   - [ ] 
    - [ ] Favicon (public/index.html)
 
    - `w3-content` will let things inside of it be centered, small
@@ -34,7 +33,7 @@ Color Scheme:
    - `w3-blue-grey` for secondary links/actions (like a link to a form)
 
 As long as it's in a container, this should work:
-`className="w3-col m12 l4"`
+`className="w3-col m12 l4"` (small/medium full width, large 33%)
 
 Bug: 
     - [x] Reloading on the Service Partner Update Screen does not re-populate the form.

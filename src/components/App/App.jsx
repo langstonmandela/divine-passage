@@ -88,7 +88,14 @@ function App() {
             // logged in shows Service Partner profile else shows LoginPage
             exact
             path='/service_partner/new'>
-            <ServicePartnerForm partner={undefined} />
+            <ServicePartnerForm />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows Service Partner profile else shows LoginPage
+            exact
+            path='/service_partner/edit/:partnerId'>
+            <ServicePartnerForm  />
           </ProtectedRoute>
 
           <ProtectedRoute

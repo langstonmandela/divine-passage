@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { dateStrip } from '../../utils/helper';
-import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 
-function ServicePartnerForm({ partner }) {
+function ServicePartnerForm() {
     const dispatch = useDispatch();
     const history = useHistory();
+    const { partnerId } = useParams();
+    const partners = useSelector((store) => store.servicePartners);
+
+    const partner = partners.find(
+        (partner) => Number(partner.service_partner_id) === Number(partnerId)
+    );
 
     const initialProfile = {
         firstName: partner?.first_name ?? '',
@@ -47,7 +54,7 @@ function ServicePartnerForm({ partner }) {
     };
 
     return (
-        <div className="w3-auto w3-padding">
+        <div className="w3-padding w3-col m12 l6">
             <h2 className="w3-text-teal">Service Partner Form</h2>
             <p>Add a new Service Partner. Intake Forms can be added after service partner creation.</p>
             <form className="w3-card w3-padding" onSubmit={handleSubmit}>
@@ -110,8 +117,9 @@ function ServicePartnerForm({ partner }) {
                     value={profile.dateOfPlacement}
                     onChange={(event) => setProfile({ ...profile, dateOfPlacement: event.target.value })}
                 />
-                <button className="w3-btn w3-green w3-round w3-margin-top">{partner ? 'Update' : 'Create'}</button>
+                <button className="w3-btn w3-teal w3-round w3-margin-top">{partner ? 'Update' : 'Create'}</button>
                 <button
+                    type="button"
                     className="w3-button w3-right w3-khaki w3-round w3-margin-top w3-margin-left"
                     style={{ marginTop: '16px' }}
                     onClick={() => history.push('/service_partner/')}>Back to Provider List</button>

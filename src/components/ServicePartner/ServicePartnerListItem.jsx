@@ -22,7 +22,7 @@ function ServicePartnerListItem({ partner }) {
                 {dateStrip(partner?.date_of_placement)}
             </td>
             <td>
-                <button className="w3-button w3-teal" onClick={handleProfile}>Open Profile</button>
+                <button className="w3-button w3-teal w3-round" onClick={handleProfile}>Open Profile</button>
             </td>
         </tr>
     );

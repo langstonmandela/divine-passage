@@ -10,7 +10,7 @@ function ServicePartnerPage() {
     return (
         <div className="w3-container w3-margin-top">
             <h1 className="w3-text-teal">My Dashboard</h1>
-            <p>Welcome! Here are your service providers</p>
+            <p>Welcome! Here are your Service Partners</p>
             {/* Wrapper for form and list could be added here if needed for layout purposes */}
             <ServicePartnerList servicePartners={servicePartners} />
             {/* <ServicePartnerForm partner={undefined} /> */}
