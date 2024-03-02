@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { dateStrip } from '../../utils/helper';
 import { useHistory } from 'react-router-dom';
@@ -17,6 +17,20 @@ function ServicePartnerForm({ partner }) {
     };
     const [profile, setProfile] = useState(initialProfile);
 
+    useEffect(() => {
+        // After redux loads the profile, we dont get another chance
+        // to set default state, so we have to do it here in a
+        // useEffect that is watching the incoming `partner` data
+        setProfile({
+            firstName: partner?.first_name ?? '',
+            nick_name: partner?.nick_name ?? '',
+            lastName: partner?.last_name ?? '',
+            dateOfBirth: dateStrip(partner?.date_of_birth) ?? '',
+            gender: partner?.gender ?? '',
+            dateOfPlacement: dateStrip(partner?.date_of_placement) ?? '',
+        })
+    }, [partner])
+
     const handleSubmit = (event) => {
         event.preventDefault();
         if (partner) {
@@ -27,13 +41,15 @@ function ServicePartnerForm({ partner }) {
         } else {
             dispatch({ type: 'CREATE_SERVICE_PARTNER', payload: profile });
             setProfile(initialProfile);
+            history.push('/service_partner/');
+            alert(`Successfully added service provider, ${profile.firstName} ${profile.lastName}`);
         }
-        alert(`${profile.firstName}'s form to /service_partner`);
     };
 
     return (
         <div className="w3-auto w3-padding">
             <h2 className="w3-text-teal">Service Partner Form</h2>
+            <p>Add a new Service Partner. Intake Forms can be added after service partner creation.</p>
             <form className="w3-card w3-padding" onSubmit={handleSubmit}>
                 <label htmlFor="firstName" className="w3-text-teal">First Name</label>
                 <input

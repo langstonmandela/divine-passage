@@ -9,7 +9,6 @@ function ServicePartnerListItem({ partner }) {
         history.push(`/service_partner/${partner.service_partner_id}`);
     };
 
-
     return (
         <tr>
             <td className="w3-large">
