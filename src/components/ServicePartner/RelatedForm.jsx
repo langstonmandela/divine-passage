@@ -1,17 +1,15 @@
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { dateStrip } from '../../utils/helper';
+import { useHistory } from 'react-router-dom';
 
-function RelatedForm({ partnerForm }) {
+function RelatedForm({ partnerForm, myPartner }) { // Ensure myPartner is passed as a prop here
     const guardianships = useSelector((store) => store.guardianships);
-
+    const history = useHistory();
     
     const [guardianshipRecords, setGuardianshipRecords] = useState([]);
 
     useEffect(() => {
-        
-        const formId = partnerForm?.id; 
-
         console.log('Partner Form:', partnerForm);
 
         // Filters guardianship records to include only those that have a matching forms_aggregator_id
@@ -29,14 +27,12 @@ function RelatedForm({ partnerForm }) {
 
         console.log('Filtered Guardianship Records:', filteredGuardianships);
 
-        
         setGuardianshipRecords(filteredGuardianships);
     }, [guardianships, partnerForm]); 
 
     console.log('Guardianships from store:', guardianships);
     console.log('Guardianship Records State:', guardianshipRecords);
 
-    
     return (
         <div className="w3-card w3-round w3-col m12 l8 w3-margin">
             <header className="w3-container w3-light-grey">
@@ -52,6 +48,7 @@ function RelatedForm({ partnerForm }) {
                             <th>Court Order Number</th>
                             <th>CPS Worker Details</th>
                             <th>Date Created</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,11 +62,16 @@ function RelatedForm({ partnerForm }) {
                                         Phone: {record.cpsWorkerPhone}
                                     </td>
                                     <td>{record.dateCreated}</td>
+                                    <td>
+                                        <button className="w3-button w3-teal w3-round" onClick={() => history.push(`/guardianship/${myPartner?.service_partner_id}/${partnerForm.forms_aggregator_id}`)}>
+                                            Add Guardianship +
+                                        </button>
+                                    </td>
                                 </tr>
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="3">No guardianship records found.</td>
+                                <td colSpan="4">No guardianship records found.</td>
                             </tr>
                         )}
                     </tbody>

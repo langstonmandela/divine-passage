@@ -6,7 +6,9 @@ function IntakeListItem({ intakeForm, myPartner }) {
     return (
         <li className="w3-padding">
             <h3>Intake Form Details: {intakeForm.forms_aggregator_id}</h3>
-            <button className="w3-button w3-teal" onClick={() => history.push(`/guardianship/${myPartner.service_partner_id}/${intakeForm.forms_aggregator_id}`)}>Add Guardianship +</button>
+            <button className="w3-button w3-teal w3-round" onClick={() => history.push(`/guardianship/${myPartner.service_partner_id}/${partnerForm.forms_aggregator_id}`)}>
+                    Add Guardianship +
+            </button>
         </li>
     );
 }
